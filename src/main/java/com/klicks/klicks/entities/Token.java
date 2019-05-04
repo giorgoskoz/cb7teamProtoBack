@@ -7,10 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.klicks.klicks.entities.User;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "token")
 public class Token {
 
 	@Id
@@ -19,7 +19,7 @@ public class Token {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk-user-id")
+	@JoinColumn(name = "fk-user-id", referencedColumnName = "id")
 	private User user;
 	
 	@Column(name = "token")

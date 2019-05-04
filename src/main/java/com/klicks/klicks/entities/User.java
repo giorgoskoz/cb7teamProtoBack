@@ -51,7 +51,8 @@ public class User {
 	@Column(name = "random")
 	private String random;
 	
-	@OneToMany(mappedBy = "users")
+	@OneToMany
+	@JoinColumn(name = "fk-user-id", referencedColumnName = "id")
 	@JsonIgnore
 	private List<Token> tokens;
 	
@@ -63,10 +64,8 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, String username, String password, com.klicks.klicks.entities.Role role, String firstName,
+	public User(String username, String password, Role role, String firstName,
 			String lastName, String email) {
-		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;

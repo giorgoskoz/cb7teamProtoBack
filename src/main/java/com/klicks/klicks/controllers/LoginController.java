@@ -49,7 +49,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/logout")
-	public void logout(@RequestHeader(value = "X-MSG-AUTH") String alphanumeric) {
+	public void logout(@RequestHeader(value = "X-KLICK-AUTH") String alphanumeric) {
 		tokenRepository.deleteByAlphanumeric(alphanumeric);
 	}
 }

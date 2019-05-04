@@ -28,7 +28,7 @@ public class RegisterController {
 	@Autowired
 	public TokenRepository tokenRepository;
 
-	@PostMapping("/save")
+	@PostMapping("/user")
 	public void registerUser(@RequestBody User user) {
 		User user2 = userRepository.findByUsername(user.getUsername());
 		User user3 = userRepository.findByEmail(user.getEmail());
