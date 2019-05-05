@@ -9,17 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.klicks.klicks.entities.User;
 @Entity
 @Table(name = "token")
 public class Token {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "idtoken")
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk-user-id", referencedColumnName = "id")
+	@JoinColumn(name = "fk_user_id", referencedColumnName = "iduser")
 	private User user;
 	
 	@Column(name = "token")

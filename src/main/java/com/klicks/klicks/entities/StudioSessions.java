@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.klicks.klicks.entities.User;
+
 @Entity
 @Table(name = "studio-sessions")
 public class StudioSessions {
@@ -18,7 +20,7 @@ public class StudioSessions {
 	@Column(name = "id")
 	private int id;
 	
-	@JoinColumn(name = "fk-user-id", referencedColumnName = "id")
+	@JoinColumn(name = "fk_user_id", referencedColumnName = "iduser")
 	@ManyToOne
 	private User user;
 	

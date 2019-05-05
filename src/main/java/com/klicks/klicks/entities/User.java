@@ -23,7 +23,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "iduser")
 	private int id;
 	
 	@Column(name = "username")
@@ -32,7 +32,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-	@JoinColumn(name = "fk-role-id", referencedColumnName = "id")
+	@JoinColumn(name = "fk_role_id", referencedColumnName = "id")
 	@ManyToOne
 	private Role role;
 
@@ -52,12 +52,12 @@ public class User {
 	private String random;
 	
 	@OneToMany
-	@JoinColumn(name = "fk-user-id", referencedColumnName = "id")
+	@JoinColumn(name = "fk_user_id", referencedColumnName = "iduser")
 	@JsonIgnore
 	private List<Token> tokens;
 	
 	@OneToMany
-	@JoinColumn(name = "fk-user-id", referencedColumnName = "id")
+	@JoinColumn(name = "fk_user_id",referencedColumnName = "iduser")
 	@JsonIgnore
 	private List<StudioSessions> studioSessions;
 
