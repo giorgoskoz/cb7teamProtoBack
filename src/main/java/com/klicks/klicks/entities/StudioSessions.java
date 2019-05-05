@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,30 +18,43 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "studio_sessions")
 public class StudioSessions {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
+
 	@JoinColumn(name = "fk_user_id", referencedColumnName = "iduser")
 	@ManyToOne
 	private User user;
-	
+
 	@Column(name = "date")
 	private String date;
-	
+
 	@ManyToMany
 	@JoinTable(name = "session_gear", joinColumns = @JoinColumn(name = "fk_gear_id"), inverseJoinColumns = @JoinColumn(name = "fk_session_id"))
+	@JsonIgnore
 	List<ExtraGear> extras;
-	
-	
+
 	@Column(name = "total_price")
 	private double totalPrice;
 
 	public StudioSessions() {
 	}
 
+	public StudioSessions(User user, String date, double totalPrice) {
+		this.user = user;
+		this.date = date;
+		this.totalPrice = totalPrice;
+	}
+
+	public StudioSessions(User user, String date, List<ExtraGear> extras, double totalPrice) {
+		super();
+		this.user = user;
+		this.date = date;
+		this.extras = extras;
+		this.totalPrice = totalPrice;
+	}
 
 	public int getId() {
 		return id;
@@ -68,26 +80,29 @@ public class StudioSessions {
 		this.date = date;
 	}
 
-
 	public List<ExtraGear> getExtras() {
 		return extras;
 	}
-
 
 	public void setExtras(List<ExtraGear> extras) {
 		this.extras = extras;
 	}
 
-
 	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	
-	
-	
+
+	public void addExtraGear(ExtraGear extraGear) {
+		this.extras.add(extraGear);
+	}
+
+	public void removeExtraGear(ExtraGear extraGear) {
+		this.extras.remove(extraGear);
+
+	}
+
 }

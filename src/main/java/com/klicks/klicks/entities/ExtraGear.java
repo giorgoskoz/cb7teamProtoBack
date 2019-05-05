@@ -41,7 +41,6 @@ public class ExtraGear {
 	}
 
 	public ExtraGear(double price, String description, String photoLink) {
-		super();
 		this.price = price;
 		this.description = description;
 		this.photoLink = photoLink;
