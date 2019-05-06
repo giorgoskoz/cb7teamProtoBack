@@ -13,7 +13,7 @@ public class StandartGear {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "idgear")
 	private int id;
 	
 	@Column(name = "name")
@@ -26,12 +26,9 @@ public class StandartGear {
 	private String photoLink;
 
 	public StandartGear() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public StandartGear(int id, String name, String description, String photoLink) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
