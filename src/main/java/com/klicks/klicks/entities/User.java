@@ -138,7 +138,7 @@ public class User {
 		this.photoLink = photoLink;
 	}
 
-	public String getRandom() {
+	public String retrieveRandom() {
 		return random;
 	}
 

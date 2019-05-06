@@ -48,14 +48,6 @@ public class StudioSessions {
 		this.totalPrice = totalPrice;
 	}
 
-	public StudioSessions(User user, String date, List<ExtraGear> extras, double totalPrice) {
-		super();
-		this.user = user;
-		this.date = date;
-		this.extras = extras;
-		this.totalPrice = totalPrice;
-	}
-
 	public int getId() {
 		return id;
 	}

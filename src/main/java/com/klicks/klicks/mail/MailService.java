@@ -10,6 +10,7 @@ import com.klicks.klicks.entities.User;
 
 @Service
 public class MailService {
+
 	private JavaMailSender javaMailSender;
 
 	@Autowired

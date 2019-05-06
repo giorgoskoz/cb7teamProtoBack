@@ -27,7 +27,7 @@ public class ExtraGear {
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "picklink")
+	@Column(name = "piclink")
 	private String photoLink;
 	
 	@ManyToMany(mappedBy = "extras")
@@ -36,8 +36,6 @@ public class ExtraGear {
 
 	
 	public ExtraGear() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ExtraGear(double price, String description, String photoLink) {

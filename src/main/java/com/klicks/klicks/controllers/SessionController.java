@@ -18,6 +18,7 @@ import com.klicks.klicks.entities.Token;
 import com.klicks.klicks.entities.User;
 import com.klicks.klicks.repositories.SessionRepository;
 import com.klicks.klicks.repositories.TokenRepository;
+import com.klicks.klicks.validation.Validation;
 
 @RestController
 @RequestMapping("/sessions")
@@ -30,23 +31,24 @@ public class SessionController {
 	@Autowired
 	TokenRepository tokenRepository;
 	
-	@GetMapping("/between/{date}/{date2}")
+	@GetMapping("between/{date}/{date2}")
 	public List<StudioSessions> findbetween(@PathVariable String date, @PathVariable String date2){
 		return sessionRepository.findByDateBetween(date, date2);
 	}
 	
-	@PostMapping("book/{date}/{price}")
-	public void bookSession(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date, @PathVariable double price) {
-		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
-		User user = token.getUser();
-		StudioSessions session = new StudioSessions(user, date, price);
-		sessionRepository.save(session);
-	}
+//	@PostMapping("book/{date}/{price}")
+//	public void bookSession(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date, @PathVariable double price) {
+//		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+//		User user = token.getUser();
+//		StudioSessions session = new StudioSessions(user, date, price);
+//		sessionRepository.save(session);
+//	}
 	
 	@PostMapping("book2/{date}/{price}")
 	public void book(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date,
 			@PathVariable double price, @RequestBody List<ExtraGear> extras) {
 		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
 		User user = token.getUser();
 		StudioSessions session = new StudioSessions(user, date, price);
 		double sum = price;
@@ -60,18 +62,12 @@ public class SessionController {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("for-user")
+	public List<StudioSessions> usersSessions(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric){
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		User user = token.getUser();
+		return sessionRepository.findByuser(user);
+	}
 	
 }

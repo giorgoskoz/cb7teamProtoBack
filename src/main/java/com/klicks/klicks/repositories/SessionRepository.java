@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.klicks.klicks.entities.StudioSessions;
+import com.klicks.klicks.entities.User;
 
 @Repository
 public interface SessionRepository extends JpaRepository<StudioSessions, Integer>  {
@@ -19,6 +20,8 @@ public interface SessionRepository extends JpaRepository<StudioSessions, Integer
 	StudioSessions findByDate(String date);
 	
 	List<StudioSessions> findByDateBetween(String start, String end);
+	
+	List<StudioSessions> findByuser(User user);
 
 	@Modifying
     @Query(value = "INSERT INTO session_gear(fk_gear_id, fk_session_id) VALUES (:gearId,:sessionId)", nativeQuery = true)
