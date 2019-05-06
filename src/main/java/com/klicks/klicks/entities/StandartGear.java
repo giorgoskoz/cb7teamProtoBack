@@ -22,7 +22,7 @@ public class StandartGear {
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "picklink")
+	@Column(name = "piclink")
 	private String photoLink;
 
 	public StandartGear() {
