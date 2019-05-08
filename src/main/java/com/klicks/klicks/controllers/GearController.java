@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,6 +69,21 @@ public class GearController {
 		Validation.validateToken(token);
 		extraGearRepository.deleteById(gearId);
 	}
+	
+	@PostMapping("add-extra")
+	public void addExtraGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@RequestBody ExtraGear gear) {
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		extraGearRepository.save(gear);
+	}
+	
+	@PostMapping("add-standart")
+	public void addStandartGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@RequestBody StandartGear gear) {
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		standartGearRepository.save(gear);
+	}
+	
 	
 }
 
