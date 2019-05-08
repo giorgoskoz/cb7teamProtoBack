@@ -21,7 +21,7 @@ public interface SessionRepository extends JpaRepository<StudioSessions, Integer
 	
 	List<StudioSessions> findByDateBetween(String start, String end);
 	
-	List<StudioSessions> findByuser(User user);
+	List<StudioSessions> findByUser(User user);
 
 	@Modifying
     @Query(value = "INSERT INTO session_gear(fk_gear_id, fk_session_id) VALUES (:gearId,:sessionId)", nativeQuery = true)

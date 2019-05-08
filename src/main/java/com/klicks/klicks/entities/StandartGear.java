@@ -66,6 +66,5 @@ public class StandartGear {
 	public void setPhotoLink(String photoLink) {
 		this.photoLink = photoLink;
 	}
-	
-	
+		
 }

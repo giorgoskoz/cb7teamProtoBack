@@ -45,9 +45,6 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "piclink")
-	private String photoLink;
-	
 	@Column(name = "random")
 	private String random;
 	
@@ -128,14 +125,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPhotoLink() {
-		return photoLink;
-	}
-
-	public void setPhotoLink(String photoLink) {
-		this.photoLink = photoLink;
 	}
 
 	public String retrieveRandom() {

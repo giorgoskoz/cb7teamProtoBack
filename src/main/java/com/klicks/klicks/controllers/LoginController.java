@@ -25,10 +25,10 @@ import com.klicks.klicks.repositories.UserRepository;
 public class LoginController {
 
 	@Autowired
-	public UserRepository userRepository;
+	UserRepository userRepository;
 
 	@Autowired
-	public TokenRepository tokenRepository;
+	TokenRepository tokenRepository;
 
 	@PostMapping("/user")
 	public Token loginUser(@RequestBody Login login) {

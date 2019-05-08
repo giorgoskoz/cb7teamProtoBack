@@ -30,6 +30,9 @@ public class ExtraGear {
 	@Column(name = "piclink")
 	private String photoLink;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@ManyToMany(mappedBy = "extras")
 	@JsonIgnore
 	List<StudioSessions> sessions;
@@ -38,10 +41,11 @@ public class ExtraGear {
 	public ExtraGear() {
 	}
 
-	public ExtraGear(double price, String description, String photoLink) {
+	public ExtraGear(double price, String description, String photoLink, String name) {
 		this.price = price;
 		this.description = description;
 		this.photoLink = photoLink;
+		this.name = name;
 	}
 
 	public int getId() {
@@ -74,6 +78,14 @@ public class ExtraGear {
 
 	public void setPhotoLink(String photoLink) {
 		this.photoLink = photoLink;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<StudioSessions> getSessions() {

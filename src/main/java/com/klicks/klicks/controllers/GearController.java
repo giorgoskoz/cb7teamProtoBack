@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.klicks.klicks.entities.ExtraGear;
 import com.klicks.klicks.entities.StandartGear;
-import com.klicks.klicks.entities.StudioSessions;
 import com.klicks.klicks.entities.Token;
 import com.klicks.klicks.repositories.ExtraGearRepository;
 import com.klicks.klicks.repositories.SessionRepository;
@@ -54,5 +54,20 @@ public class GearController {
 		return extraGearRepository.findGearBySessions(sessionId);
 
 	}
+	
+	@PostMapping("delete-standart/{gearId}")
+	public void reamoveStandartGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@PathVariable int gearId) {
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		standartGearRepository.deleteById(gearId);
+	}
+	
+	@PostMapping("delete-extra/{gearId}")
+	public void reamoveExtratGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@PathVariable int gearId) {
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		extraGearRepository.deleteById(gearId);
+	}
+	
 }
 

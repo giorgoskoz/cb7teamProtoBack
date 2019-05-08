@@ -23,10 +23,10 @@ import com.klicks.klicks.repositories.UserRepository;
 public class RegisterController {
 
 	@Autowired
-	public UserRepository userRepository;
+	UserRepository userRepository;
 
 	@Autowired
-	public TokenRepository tokenRepository;
+	TokenRepository tokenRepository;
 
 	@PostMapping("/user")
 	public void registerUser(@RequestBody User user) {

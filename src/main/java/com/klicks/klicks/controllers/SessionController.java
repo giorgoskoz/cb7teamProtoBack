@@ -27,15 +27,15 @@ public class SessionController {
 
 	@Autowired
 	SessionRepository sessionRepository;
-	
+
 	@Autowired
 	TokenRepository tokenRepository;
-	
+
 	@GetMapping("between/{date}/{date2}")
-	public List<StudioSessions> findbetween(@PathVariable String date, @PathVariable String date2){
+	public List<StudioSessions> findbetween(@PathVariable String date, @PathVariable String date2) {
 		return sessionRepository.findByDateBetween(date, date2);
 	}
-	
+
 //	@PostMapping("book/{date}/{price}")
 //	public void bookSession(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date, @PathVariable double price) {
 //		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
@@ -43,7 +43,7 @@ public class SessionController {
 //		StudioSessions session = new StudioSessions(user, date, price);
 //		sessionRepository.save(session);
 //	}
-	
+
 	@PostMapping("book2/{date}/{price}")
 	public void book(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date,
 			@PathVariable double price, @RequestBody List<ExtraGear> extras) {
@@ -52,22 +52,29 @@ public class SessionController {
 		User user = token.getUser();
 		StudioSessions session = new StudioSessions(user, date, price);
 		double sum = price;
-		for(ExtraGear extra : extras) {
+		for (ExtraGear extra : extras) {
 			sum += extra.getPrice();
 		}
 		session.setTotalPrice(sum);
 		sessionRepository.save(session);
-		for(ExtraGear extra : extras) {
+		for (ExtraGear extra : extras) {
 			sessionRepository.addExtraGear(extra.getId(), session.getId());
 		}
 	}
-	
+
 	@GetMapping("for-user")
-	public List<StudioSessions> usersSessions(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric){
+	public List<StudioSessions> usersSessions(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric) {
 		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
 		Validation.validateToken(token);
 		User user = token.getUser();
-		return sessionRepository.findByuser(user);
+		return sessionRepository.findByUser(user);
 	}
-	
+
+	@PostMapping("/delete/{sessionId}")
+	public void deleteMsg(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable int sessionId) {
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		sessionRepository.deleteById(sessionId);
+	}
+
 }
