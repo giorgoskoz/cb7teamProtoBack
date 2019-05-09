@@ -70,18 +70,24 @@ public class GearController {
 		extraGearRepository.deleteById(gearId);
 	}
 	
-	@PostMapping("add-extra")
-	public void addExtraGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@RequestBody ExtraGear gear) {
+	@PostMapping("add-extra/{name}/{price}")
+	public ExtraGear addExtraGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String name,@PathVariable int price, @RequestBody String desc) {
 		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
 		Validation.validateToken(token);
+		ExtraGear gear = new ExtraGear(price,desc, name);
 		extraGearRepository.save(gear);
+		ExtraGear newGear = extraGearRepository.findById(gear.getId());
+		return newGear;
 	}
 	
-	@PostMapping("add-standart")
-	public void addStandartGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@RequestBody StandartGear gear) {
+	@PostMapping("add-standart/{name}")
+	public StandartGear addStandartGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String name, @RequestBody String desc) {
 		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
 		Validation.validateToken(token);
+		StandartGear gear = new StandartGear(name,desc);
 		standartGearRepository.save(gear);
+		StandartGear newGear = standartGearRepository.findById(gear.getId());
+		return newGear;
 	}
 	
 	

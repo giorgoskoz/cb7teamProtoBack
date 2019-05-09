@@ -28,11 +28,9 @@ public class StandartGear {
 	public StandartGear() {
 	}
 
-	public StandartGear(int id, String name, String description, String photoLink) {
-		this.id = id;
+	public StandartGear(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.photoLink = photoLink;
 	}
 
 	public int getId() {

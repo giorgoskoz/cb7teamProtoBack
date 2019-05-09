@@ -84,8 +84,8 @@ public class FileController {
 	}
 
 	@PostMapping("/savePhotoLinkStandart/{gearId}")
-	public void savePhotoLinkStandart(@PathVariable int userId, @RequestBody String photoLink) {
-		StandartGear gear = standartGearRepository.findById(userId);
+	public void savePhotoLinkStandart(@PathVariable int gearId, @RequestBody String photoLink) {
+		StandartGear gear = standartGearRepository.findById(gearId);
 		Validation.validateStandartgear(gear);
 		gear.setPhotoLink(photoLink);
 		standartGearRepository.save(gear);
