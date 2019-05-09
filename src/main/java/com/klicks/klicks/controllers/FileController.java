@@ -92,8 +92,8 @@ public class FileController {
 	}
 	
 	@PostMapping("/savePhotoLinkExtra/{gearId}")
-	public void savePhotoLinkExtra(@PathVariable int userId, @RequestBody String photoLink) {
-		ExtraGear gear = extraGearRepository.findById(userId);
+	public void savePhotoLinkExtra(@PathVariable int gearId, @RequestBody String photoLink) {
+		ExtraGear gear = extraGearRepository.findById(gearId);
 		Validation.validateExtragear(gear);
 		gear.setPhotoLink(photoLink);
 		extraGearRepository.save(gear);

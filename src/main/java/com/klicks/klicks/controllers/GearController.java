@@ -71,7 +71,7 @@ public class GearController {
 	}
 	
 	@PostMapping("add-extra/{name}/{price}")
-	public ExtraGear addExtraGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String name,@PathVariable int price, @RequestBody String desc) {
+	public ExtraGear addExtraGear(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String name,@PathVariable double price, @RequestBody String desc) {
 		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
 		Validation.validateToken(token);
 		ExtraGear gear = new ExtraGear(price,desc, name);
