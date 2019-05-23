@@ -43,6 +43,16 @@ public class SessionController {
 //		StudioSessions session = new StudioSessions(user, date, price);
 //		sessionRepository.save(session);
 //	}
+	
+	@GetMapping("before/{date}")
+	public List<StudioSessions> getSessionsBefore(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date) {
+		return sessionRepository.findByDateBefore(date);
+	}
+	
+	@GetMapping("after/{date}")
+	public List<StudioSessions> getSessionsAfter(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date) {
+		return sessionRepository.finbyDateAfter(date);
+	}
 
 	@PostMapping("book2/{date}/{price}")
 	public void book(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date,
