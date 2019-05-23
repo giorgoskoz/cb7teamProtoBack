@@ -36,7 +36,7 @@ public class GearController {
 	TokenRepository tokenRepository;
 	
 	@Autowired
-	SessionRepository sessionRepository;
+	public SessionRepository sessionRepository;
 	
 	@GetMapping("all-standart")
 	public List<StandartGear> getAllstandartGear(){

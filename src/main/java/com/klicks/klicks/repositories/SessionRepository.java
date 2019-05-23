@@ -19,6 +19,14 @@ public interface SessionRepository extends JpaRepository<StudioSessions, Integer
 	
 	StudioSessions findByDate(String date);
 	
+	List<StudioSessions> findByDateBefore(String date);
+	
+	List<StudioSessions> findByUserAndDateBefore(User user, String date);
+
+	List<StudioSessions>  findByUserAndDateAfter(User user, String date);
+	
+	List<StudioSessions> findByDateAfter(String date);
+	
 	List<StudioSessions> findByDateBetween(String start, String end);
 	
 	List<StudioSessions> findByUser(User user);

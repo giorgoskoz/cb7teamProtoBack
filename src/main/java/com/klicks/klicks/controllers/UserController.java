@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +42,15 @@ public class UserController {
 		int count = DatabaseHelper.getSimpleUsersCount();
 		List<User> users = userRepository.findByRole(role, PageRequest.of(page, size));
 		return new Result<User>(count, users);
+	}
+	
+	@PostMapping("delete/{userId}")
+	public void deleteUser(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric,@PathVariable int userId) {
+		Token token = tokenRepository.findByAlphanumeric(alphanumeric);
+		Validation.validateToken(token);
+		User user = userRepository.findById(userId);
+		Validation.validateUser(user);
+		userRepository.delete(user);
 	}
 	
 }
