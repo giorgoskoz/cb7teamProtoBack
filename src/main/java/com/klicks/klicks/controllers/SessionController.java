@@ -49,9 +49,10 @@ public class SessionController {
 		return sessionRepository.findByDateBefore(date);
 	}
 	
+	
 	@GetMapping("after/{date}")
 	public List<StudioSessions> getSessionsAfter(@RequestHeader(value = "X-KLICKS-AUTH") String alphanumeric, @PathVariable String date) {
-		return sessionRepository.finbyDateAfter(date);
+		return sessionRepository.findByDateAfter(date);
 	}
 
 	@PostMapping("book2/{date}/{price}")
